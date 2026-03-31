@@ -201,9 +201,14 @@
   display: flex;
   gap: 8px;
 }
-.url-input-wrapper .input {
+.url-input-wrapper .input-with-icon {
   flex: 1;
-  padding: 16px 20px;
+  position: relative;
+  display: flex;
+}
+.url-input-wrapper .input {
+  width: 100%;
+  padding: 16px 48px 16px 20px;
   font-size: 1rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid transparent;
@@ -212,6 +217,23 @@
 .url-input-wrapper .input:focus {
   border-color: var(--accent-primary);
   background: rgba(255, 255, 255, 0.08);
+}
+.paste-icon-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px;
+  transition: transform var(--transition-fast), filter var(--transition-fast);
+}
+.paste-icon-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+  filter: brightness(1.2);
 }
 .url-input-wrapper .btn {
   padding: 16px 32px;

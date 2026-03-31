@@ -186,3 +186,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 });
+
+// ---- Helpers ----
+window.handlePaste = async function(inputId) {
+  try {
+    const text = await navigator.clipboard.readText();
+    const input = document.getElementById(inputId);
+    input.value = text;
+    // Trigger validation styling
+    input.focus();
+  } catch (err) {
+    if (window.showToast) showToast('Clipboard access denied. Please paste manually.', 'warning');
+  }
+};
