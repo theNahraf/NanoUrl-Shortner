@@ -95,9 +95,23 @@ async function shortenUrl(longUrl, options = {}, user = null) {
 
     shortCode = options.customAlias;
   } else {
-    // Generate unique short code via Snowflake + Base62
-    const id = snowflake.generate();
-    shortCode = base62.encode(id);
+    // Generate unique 5-character short code using crypto
+    const charset = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const crypto = require('crypto');
+    let isUnique = false;
+    
+    while (!isUnique) {
+      shortCode = '';
+      const randomBytes = crypto.randomBytes(5);
+      for (let i = 0; i < 5; i++) {
+        shortCode += charset[randomBytes[i] % charset.length];
+      }
+      // Guarantee uniqueness
+      const existing = await db('urls').where({ short_code: shortCode }).first();
+      if (!existing) {
+        isUnique = true;
+      }
+    }
   }
 
   // Hash password if provided
