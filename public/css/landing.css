@@ -50,6 +50,7 @@
 .navbar.menu-open {
   backdrop-filter: none !important;
   background: var(--bg-primary) !important;
+  transition: background var(--transition-base), padding var(--transition-base) !important;
 }
 .navbar-inner {
   display: flex;
